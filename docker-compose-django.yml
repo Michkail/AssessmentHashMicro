@@ -1,7 +1,7 @@
 services:
   web:
     image: img-dj:1.0.0
-    container_name: serv-bpr
+    container_name: cont-dj
     restart: always
     command: ["sh", "-c", "uv run manage.py migrate --fake-initial && uv run manage.py collectstatic --noinput && uv run manage.py runserver 0.0.0.0:8088"]
     environment:
