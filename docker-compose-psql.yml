@@ -1,7 +1,7 @@
 services:
   postgres:
     image: postgres:17.4
-    container_nameL: serv-psql
+    container_name: serv-psql
     restart: always
     environment: 
       POSTGRES_USER: amy
