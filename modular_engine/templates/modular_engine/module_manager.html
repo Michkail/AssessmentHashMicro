@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Module Manager</title>
+</head>
+<body>
+    <h1>Module Manager</h1>
+    <table border="1" cellpadding="10">
+        <tr>
+          <th>Module</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+        {% for mod in modules %}
+        <tr>
+          <td>{{ mod }}</td>
+          <td>
+            {% if mod in installed_modules %}
+              Installed
+            {% else %}
+              Not Installed
+            {% endif %}
+          </td>
+          <td>
+            <form method="post" style="display:inline;">
+              {% csrf_token %}
+              <input type="hidden" name="module_name" value="{{ mod }}">
+              {% if mod in installed_modules %}
+                <button name="action" value="upgrade">Upgrade</button>
+                <button name="action" value="uninstall">Uninstall</button>
+              {% else %}
+                <button name="action" value="install">Install</button>
+              {% endif %}
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+      
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+</body>
+</html>
